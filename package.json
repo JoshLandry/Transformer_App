@@ -1,0 +1,46 @@
+{
+  "name": "bit-transformer",
+  "version": "0.1.0",
+  "description": "A conversion tool for transforming .bmp files",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/grunt-cli/bin/grunt test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rorysterley/bit-transformer.git"
+  },
+  "author": "Rory Sterley <rorysterley@gmail.com>",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Rory Sterley",
+      "email": "rorysterley@gmail.com"
+    },
+    {
+      "name": "Christian Townsdin",
+      "email": "townsdin@gmail.com"
+    },
+    {
+      "name": "Daniel Nofziger",
+      "email": "dannofziger@gmail.com"
+    },
+    {
+      "name": "Joshua Landry",
+      "email": "bluemazaro@yahoo.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/rorysterley/bit-transformer/issues"
+  },
+  "homepage": "https://github.com/rorysterley/bit-transformer",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-simple-mocha": "^0.4.0",
+    "mocha": "^2.1.0"
+  }
+}
