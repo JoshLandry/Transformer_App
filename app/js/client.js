@@ -12,6 +12,9 @@ console.log('my code really does things');
 
 transphormApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
+  .when('/image_upload', {
+    templateUrl: 'templates/image_upload.html'
+  })
   .when('/image_menu', {
     templateUrl: 'templates/image_menu.html'
   })
