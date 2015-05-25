@@ -29,12 +29,18 @@ module.exports = function(app) {
           + " bytes in a variable of type '" + typeof(data) + "'";
           console.log($scope.info);
 
-          $scope.currentImage.data = new Int8Array(data);
+          $scope.currentImage.data = new Uint8Array(data);
 
          	$scope.currentImage.colorPalette = new Int8Array(data, 54, 1024);
+
+         	var blob = new Blob( [ $scope.currentImage.data ], { type: "image/jpeg" } );
+			    var urlCreator = window.URL || window.webkitURL;
+			    var imageUrl = urlCreator.createObjectURL( blob );
+			    $scope.currentImage.URL = imageUrl;
           
           console.log($scope.currentImage.data);
           console.log($scope.currentImage.colorPalette);
+          console.log($scope.currentImage.URL);
 
           $location.path('/original_image');
         })
@@ -43,6 +49,14 @@ module.exports = function(app) {
           alert("this is not a valid image file.  it will be removed from the menu.");
           $scope.remove(image);
         });
+    };
+
+    $scope.render = function() {
+    	var blob = new Blob( [ $scope.currentImage.data ], { type: "image/jpeg" } );
+			var urlCreator = window.URL || window.webkitURL;
+			var imageUrl = urlCreator.createObjectURL( blob );
+			$scope.currentImage.URL = imageUrl;
+			$location.path('/original_image');
     };
 
 		$scope.create = function(image) {
@@ -110,6 +124,7 @@ module.exports = function(app) {
 		  }
 
 		  console.log(colorPalette);
+		  $scope.render();
 		};
 
 		$scope.random = function() {
@@ -120,6 +135,7 @@ module.exports = function(app) {
 		  }
 
 		  console.log(colorPalette);
+		  $scope.render();
 		};
 
 		$scope.colorStep = function() {
@@ -130,6 +146,7 @@ module.exports = function(app) {
 		  }
 
 		  console.log(colorPalette);
+		  $scope.render();
 		};
 
 	}]);
