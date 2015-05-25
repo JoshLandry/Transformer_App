@@ -86,7 +86,7 @@ module.exports = function(app) {
 			var urlCreator = window.URL || window.webkitURL;
 			var imageUrl = urlCreator.createObjectURL( blob );
 			$scope.currentImage.URL = imageUrl;
-			$location.path('/original_image');
+			// $location.path('/original_image');
     };
 
 		$scope.create = function(image) {
@@ -177,6 +177,13 @@ module.exports = function(app) {
 
 		  console.log(colorPalette);
 		  $scope.render();
+		};
+
+		$scope.colorCycle = function() {
+			$scope.colorStep();
+			setTimeout(function() {$scope.colorCycle();}, 1000)
+			setTimeout(function() {$scope.colorCycle();}, 2000)
+			setTimeout(function() {$scope.colorCycle();}, 3000)
 		};
 
 	}]);
