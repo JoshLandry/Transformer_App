@@ -1,0 +1,21 @@
+<div>
+  <h2>All of your images.</h2> <br>
+  <ul data-ng-repeat="image in images">
+    <li>
+      Image Named: {{image.imageName}}
+    </li>
+    <li>
+      Image Summary: {{image.imageDesc}}
+    </li>
+    <form data-ng-if="image.editing">
+        <label for="image{{image._id}}"></label>
+        Rename it thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageName"> <br>
+        Resay him thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageDesc"> 
+        <button type="submit" data-ng-click="save(image)">Save image info</button>
+        <button type="button" data-ng-click="editToggle(image)">Cancel</button>
+    </form>
+    <button data-ng-click="editToggle(image)" data-ng-if="!image.editing">Edit image info</button>
+    <button data-ng-click="remove(image)">Delete image</button> <br>
+    <a href="http://localhost:3000/#/original_image">Bring image to TRANSPHORMER</a>
+  </ul>
+</div>

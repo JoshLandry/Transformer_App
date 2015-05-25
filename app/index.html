@@ -5,32 +5,14 @@
 </head>
 <body data-ng-app="transphormApp">
 	<main data-ng-controller="imagesController" data-ng-init="getAll()">
-		<h1>What will this say?</h1>
+		<h1>Upload new image</h1>
     <form>
       <label for="newImage"></label>
       Name yr image: <input type="text" id="newImageName" data-ng-model="newImage.imageName"> <br>
       Image summary: <input type="text" id="newImageSays" data-ng-model="newImage.imageDesc"> <br>
       Save image: <input type="submit" data-ng-click="create(newImage)"></input>
     </form>
-    <h2>YOU MAY SLAUGHTER YOUR GOATS AT ANY TIME...</h2> <br>
-    <ul data-ng-repeat="image in images">
-      <li>
-        Image Named: {{image.imageName}}
-      </li>
-      <li>
-        Image Summary: {{image.imageDesc}}
-      </li>
-      <form data-ng-if="image.editing">
-          <label for="image{{image._id}}"></label>
-          Rename it thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageName"> <br>
-          Resay him thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageDesc"> 
-          <button type="submit" data-ng-click="save(image)">Transphorm yr image</button>
-          <button type="button" data-ng-click="editToggle(image)">Cancel</button>
-      </form>
-      <button data-ng-click="editToggle(image)" data-ng-if="!image.editing">Image Transphorm</button>
-      <button data-ng-click="remove(image)">Delete image</button>
-    </ul>
-
+    <a href="http://localhost:3000/#/image_menu">See all images</a>
     <section data-ng-view>
     </section>
 	</main>

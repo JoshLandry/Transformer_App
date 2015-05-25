@@ -13,11 +13,17 @@ console.log('my code really does things');
 
 transphormApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
+  .when('/image_menu', {
+    templateUrl: 'templates/image_menu.html'
+  })
   .when('/original_image', {
     templateUrl: 'templates/original_image.html'
   })
+  .when('/transformed_image', {
+    templateUrl: 'templates/transformed_image.html'
+  })
   .otherwise({
-    templateUrl: 'templates/four_oh_four.html'
+    templateUrl: 'templates/welcome.html'
   })
 }]);
 },{"./../../bower_components/angular-route/angular-route.js":4,"./../../bower_components/angular/angular":5,"./images/controllers/images_controller":2}],2:[function(require,module,exports){
