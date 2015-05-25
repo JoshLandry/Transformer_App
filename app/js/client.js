@@ -8,8 +8,6 @@ var transphormApp = angular.module('transphormApp', ['ngRoute']);
 //controllers
 require('./images/controllers/images_controller')(transphormApp);
 
-console.log('my code really does things');
-
 transphormApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/image_upload', {

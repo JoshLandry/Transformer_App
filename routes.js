@@ -16,10 +16,10 @@ module.exports = function (router) {
 
 	router.post('/images', function(req,res) {
 		var newImage = new imageModel(req.body);
-		newImage.save(function(err, note) {
+		newImage.save(function(err, data) {
 			if (err) return res.status(500).send({'msg': 'could not save goat.'});
 
-			res.json(note);
+			res.json(data);
 		});
 	});
 

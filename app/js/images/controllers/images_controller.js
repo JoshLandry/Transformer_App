@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-	app.controller('imagesController', ['$scope', '$http', function($scope, $http) {
+	app.controller('imagesController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 		$scope.images = [];
 		$scope.getAll = function() {
 			$http({
@@ -16,6 +16,28 @@ module.exports = function(app) {
 			})
 		};
 
+		$scope.URL = "http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png";
+		$scope.info = " ";
+
+		$scope.currentImage = {};
+
+		$scope.buffer = function(image) {
+  		delete $http.defaults.headers.common['X-Requested-With'];
+      $http.get(image.imageURL, {responseType: "arraybuffer"})
+        .success(function(data) {
+        	$scope.currentImage = data;
+          $scope.info = "Read '" + image.imageURL + "' with " + data.byteLength
+          + " bytes in a variable of type '" + typeof(data) + "'";
+          console.log($scope.info);
+          $location.path('/original_image');
+        })
+        .error(function(data, status) {
+          $scope.info = "Request failed with status: " + status;
+          alert("this is not a valid image file.  it will be removed from the menu.");
+          $scope.remove(image);
+        });
+    };
+
 		$scope.create = function(image) {
 			$http({
 				method: 'POST',
@@ -24,6 +46,7 @@ module.exports = function(app) {
 			})
 			.success(function(data) {
 				$scope.images.push(data);
+				$location.path('/image_menu');
 			})
 			.error(function(data) {
 				console.log(data);
@@ -51,7 +74,7 @@ module.exports = function(app) {
 			})
 			.success(function() {
 				$scope.images.splice($scope.images.indexOf(image), 1);
-				alert("THAT was the tastiest image!");
+				alert("Your image has been deleted.");
 			})
 			.error(function(data) {
 				console.log(data);

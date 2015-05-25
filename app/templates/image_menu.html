@@ -7,6 +7,9 @@
     <li>
       Image Summary: {{image.imageDesc}}
     </li>
+    <li>
+      Image URL: {{image.imageURL}}
+    </li>
     <form data-ng-if="image.editing">
         <label for="image{{image._id}}"></label>
         Rename it thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageName"> <br>
@@ -16,6 +19,6 @@
     </form>
     <button data-ng-click="editToggle(image)" data-ng-if="!image.editing">Edit image info</button>
     <button data-ng-click="remove(image)">Delete image</button> <br>
-    <a href="http://localhost:3000/#/original_image">Bring image to TRANSPHORMER</a>
+    <button data-ng-click="buffer(image)">TRANSPHORM</button> <br>
   </ul>
 </div>
