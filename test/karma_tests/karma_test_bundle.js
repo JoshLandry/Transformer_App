@@ -46,7 +46,6 @@ module.exports = function(app) {
 			})
 		};
 
-		$scope.URL = "http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png";
 		$scope.info = " ";
 
 		$scope.currentImage = {};
@@ -129,6 +128,38 @@ module.exports = function(app) {
 				image.oldImageName = image.imageName;
 				image.editing = true;
 			}
+		};
+
+		// transphormations
+
+		$scope.invert = function() {
+    	var colorPalette = $scope.currentImage.colorPalette;
+
+		  for(var i=0; i<1024; i++) {
+		    colorPalette[i] = (colorPalette[i] -255) * -1;
+		  }
+
+		  console.log(colorPalette);
+		};
+
+		$scope.random = function() {
+		  var colorPalette = $scope.currentImage.colorPalette;
+
+		  for(var i=0; i<1024; i++) {
+		    colorPalette[i] = colorPalette[i + Math.floor(Math.random() * 10)];
+		  }
+
+		  console.log(colorPalette);
+		};
+
+		$scope.colorStep = function() {
+		  var colorPalette = $scope.currentImage.colorPalette;
+
+		  for(var i=0; i<1024; i++) {
+		    colorPalette[i] = colorPalette[i + 1];
+		  }
+
+		  console.log(colorPalette);
 		};
 
 	}]);
