@@ -29,6 +29,14 @@ module.exports = function(app) {
           $scope.info = "Read '" + image.imageURL + "' with " + data.byteLength
           + " bytes in a variable of type '" + typeof(data) + "'";
           console.log($scope.info);
+
+          $scope.currentImage.data = new Int8Array(data);
+
+         	$scope.currentImage.colorPalette = new Int8Array(data, 54, 1024);
+          
+          console.log($scope.currentImage.data);
+          console.log($scope.currentImage.colorPalette);
+
           $location.path('/original_image');
         })
         .error(function(data, status) {
