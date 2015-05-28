@@ -9,3 +9,10 @@ Next, make sure there is an empty folder in the app directory called `db`, then 
 
 You should then see the Image Transphormer app mainscreen.  The top half of the screen has two links, which allow you to upload a new image with the upload form, or choose an image to edit from all images in the database.  The bottom half of the page will tell the user 'welcome' until they have chosen one of these options.
 
+Currently, the Transphormer has 3 different 'transphorms', Invert, Randomize, and Colorstep.
+  
+  'Invert' inverts the colors on your image, much like in mspaint.
+
+  'Randomize' will randomly shuffle the color table for your image, causing the colors to swap unpredictably.  This should produce some interesting results.
+
+  'Colorstep' shifts every color in your image's color palette over by one.  Doing this repeatedly should produce a sequential change in color.
