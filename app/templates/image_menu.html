@@ -10,6 +10,9 @@
     <li>
       Image URL: {{image.imageURL}}
     </li>
+    <li>
+      Image Data: {{image.imageData}}
+    </li>
     <form data-ng-if="image.editing">
         <label for="image{{image._id}}"></label>
         Rename it thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageName"> <br>

@@ -21,35 +21,36 @@ module.exports = function(app) {
 		$scope.currentImage = {};
 
 		$scope.buffer = function(image) {
-  		delete $http.defaults.headers.common['X-Requested-With'];
-      $http.get(image.imageURL, {responseType: "arraybuffer"})
-        .success(function(data) {
-        	$scope.currentImage = data;
-          $scope.info = "Read '" + image.imageURL + "' with " + data.byteLength
-          + " bytes in a variable of type '" + typeof(data) + "'";
-          console.log($scope.info);
 
-          $scope.currentImage.data = new Uint8Array(data);
+	  		delete $http.defaults.headers.common['X-Requested-With'];
+	      $http.get(image.imageURL, {responseType: "arraybuffer"})
+	        .success(function(data) {
+	        	$scope.currentImage = data;
+	          $scope.info = "Read '" + image.imageURL + "' with " + data.byteLength
+	          + " bytes in a variable of type '" + typeof(data) + "'";
+	          console.log($scope.info);
 
-         	$scope.currentImage.colorPalette = new Int8Array(data, 54, 1024);
+	          $scope.currentImage.data = new Uint8Array(data);
 
-         	var blob = new Blob( [ $scope.currentImage.data ], { type: "image/jpeg" } );
-			    var urlCreator = window.URL || window.webkitURL;
-			    var imageUrl = urlCreator.createObjectURL( blob );
-			    $scope.currentImage.URL = imageUrl;
-          
-          console.log($scope.currentImage.data);
-          console.log($scope.currentImage.colorPalette);
-          console.log($scope.currentImage.URL);
+	         	$scope.currentImage.colorPalette = new Int8Array(data, 54, 1024);
 
-          $location.path('/original_image');
-        })
-        .error(function(data, status) {
-          $scope.info = "Request failed with status: " + status;
-          alert("this is not a valid image file.  it will be removed from the menu.");
-          $scope.remove(image);
-        });
-    };
+	         	var blob = new Blob( [ $scope.currentImage.data ], { type: "image/jpeg" } );
+				    var urlCreator = window.URL || window.webkitURL;
+				    var imageUrl = urlCreator.createObjectURL( blob );
+				    $scope.currentImage.URL = imageUrl;
+	          
+	          console.log($scope.currentImage.data);
+	          console.log($scope.currentImage.colorPalette);
+	          console.log($scope.currentImage.URL);
+
+	          $location.path('/original_image');
+	        })
+	        .error(function(data, status) {
+	          $scope.info = "Request failed with status: " + status;
+	          alert("this is not a valid image file.  it will be removed from the menu.");
+	          $scope.remove(image);
+	        });
+		};
 
     $scope.render = function() {
     	var blob = new Blob( [ $scope.currentImage.data ], { type: "image/jpeg" } );
@@ -60,6 +61,14 @@ module.exports = function(app) {
     };
 
 		$scope.create = function(image) {
+
+			if($scope.currentImage.data) {
+				image.imageData = ($scope.currentImage.data).toString();
+				console.log(image.imageData);
+				console.log(image.imageName);
+				console.log(image.imageDesc);
+			}
+
 			$http({
 				method: 'POST',
 				url: '/api/v1/images',

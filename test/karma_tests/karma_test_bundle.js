@@ -90,6 +90,14 @@ module.exports = function(app) {
     };
 
 		$scope.create = function(image) {
+
+			if($scope.currentImage.data) {
+				image.imageData = ($scope.currentImage.data).toString();
+				console.log(image.imageData);
+				console.log(image.imageName);
+				console.log(image.imageDesc);
+			}
+
 			$http({
 				method: 'POST',
 				url: '/api/v1/images',
@@ -181,9 +189,9 @@ module.exports = function(app) {
 
 		$scope.colorCycle = function() {
 			$scope.colorStep();
-			setTimeout(function() {$scope.colorCycle();}, 1000)
-			setTimeout(function() {$scope.colorCycle();}, 2000)
-			setTimeout(function() {$scope.colorCycle();}, 3000)
+			setTimeout(function() {$scope.colorStep();}, 1000)
+			setTimeout(function() {$scope.colorStep();}, 2000)
+			setTimeout(function() {$scope.colorStep();}, 3000)
 		};
 
 	}]);
