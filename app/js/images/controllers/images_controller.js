@@ -21,12 +21,12 @@ module.exports = function(app) {
 		$scope.currentImage = {};
 
 		$scope.buffer = function(image) {
-
 			$scope.currentImage = image;
+			if(image.colorPalette) {
+							$scope.currentImage.colorSettings = image.colorPalette;
+			}
 
-			console.log($scope.currentImage.imageURL);
-			console.log($scope.currentImage.imageName);
-			console.log($scope.currentImage.imageDesc);
+			console.log($scope.currentImage.colorSettings);
 
 			if(image.imageData) {
 				console.log(image.imageData);
@@ -48,21 +48,18 @@ module.exports = function(app) {
 
 	         	var colorPalette = $scope.currentImage.colorPalette;
 
-	         	if(image.colorPalette) {
+	         	if($scope.currentImage.colorSettings) {
 	         		for(var i=0; i<1024; i++) {
-	         			console.log (colorPalette[i] + " || " + image.colorPalette[i]);
-		    				colorPalette[i] = image.colorPalette[i];
+	         			// console.log (colorPalette[i] + " || " + $scope.currentImage.colorSettings[i]);
+		    				colorPalette[i] = $scope.currentImage.colorSettings[i];
 		  				}
 	          }
 
-	          console.log(image.colorPalette);
-	          console.log(colorPalette);
-
 	         	$scope.render();
 	          
-	          console.log($scope.currentImage.data);
-	          console.log($scope.currentImage.colorPalette);
-	          console.log($scope.currentImage.URL);
+	          // console.log($scope.currentImage.data);
+	          // console.log($scope.currentImage.colorPalette);
+	          // console.log($scope.currentImage.URL);
 
 	          $location.path('/original_image');
 	        })
@@ -109,7 +106,7 @@ module.exports = function(app) {
 				console.log(image.imageName);
 				console.log(image.imageDesc);
 				console.log(image.colorPalette);
-				console.log(image.data);
+				// console.log(image.data);
 				console.log(image);
 				console.log($scope.currentImage.data);
 			}
