@@ -22,10 +22,22 @@ module.exports = function(app) {
 
 		$scope.buffer = function(image) {
 
+			$scope.currentImage = image;
+
+			console.log($scope.currentImage.imageURL);
+			console.log($scope.currentImage.imageName);
+			console.log($scope.currentImage.imageDesc);
+
+			if(image.imageData) {
+				console.log(image.imageData);
+				$scope.currentImage.data = new Uint8Array(image.imageData);
+				$scope.render();
+				$location.path('/original_image');
+
+			} else {
 	  		delete $http.defaults.headers.common['X-Requested-With'];
 	      $http.get(image.imageURL, {responseType: "arraybuffer"})
 	        .success(function(data) {
-	        	$scope.currentImage = data;
 	          $scope.info = "Read '" + image.imageURL + "' with " + data.byteLength
 	          + " bytes in a variable of type '" + typeof(data) + "'";
 	          console.log($scope.info);
@@ -34,10 +46,19 @@ module.exports = function(app) {
 
 	         	$scope.currentImage.colorPalette = new Int8Array(data, 54, 1024);
 
-	         	var blob = new Blob( [ $scope.currentImage.data ], { type: "image/jpeg" } );
-				    var urlCreator = window.URL || window.webkitURL;
-				    var imageUrl = urlCreator.createObjectURL( blob );
-				    $scope.currentImage.URL = imageUrl;
+	         	var colorPalette = $scope.currentImage.colorPalette;
+
+	         	if(image.colorPalette) {
+	         		for(var i=0; i<1024; i++) {
+		    			colorPalette[i] = image.colorPalette[i];
+		    			console.log(colorPalette[i]);
+		  				}
+	          }
+
+	          console.log(image.colorPalette);
+	          console.log(colorPalette);
+
+	         	$scope.render();
 	          
 	          console.log($scope.currentImage.data);
 	          console.log($scope.currentImage.colorPalette);
@@ -50,6 +71,7 @@ module.exports = function(app) {
 	          alert("this is not a valid image file.  it will be removed from the menu.");
 	          $scope.remove(image);
 	        });
+	      }
 		};
 
     $scope.render = function() {
@@ -60,13 +82,36 @@ module.exports = function(app) {
 			// $location.path('/original_image');
     };
 
+    $scope.checkCurrentInfo = function() {
+    	console.log($scope.currentImage.imageName);
+    	console.log($scope.currentImage.imageDesc);
+    	console.log($scope.currentImage.colorPalette);
+    	console.log($scope.currentImage.imageURL);
+    	console.log($scope.currentImage.data);
+    }
+
 		$scope.create = function(image) {
 
 			if($scope.currentImage.data) {
-				image.imageData = ($scope.currentImage.data).toString();
-				console.log(image.imageData);
+
+				if(!image.imageName) {
+					image.imageName = $scope.currentImage.imageName;
+					image.imageDesc = $scope.currentImage.imageDesc;
+				}
+
+				if(!image.imageURL) {
+				image.imageURL = $scope.currentImage.imageURL;
+				}
+
+				image.colorPalette = $scope.currentImage.colorPalette;
+
+				console.log(image.imageURL);
 				console.log(image.imageName);
 				console.log(image.imageDesc);
+				console.log(image.colorPalette);
+				console.log(image.data);
+				console.log(image);
+				console.log($scope.currentImage.data);
 			}
 
 			$http({
@@ -132,6 +177,8 @@ module.exports = function(app) {
 		    colorPalette[i] = (colorPalette[i] -255) * -1;
 		  }
 
+		  $scope.currentImage.colorPalette = colorPalette;
+
 		  console.log(colorPalette);
 		  $scope.render();
 		};
@@ -143,6 +190,8 @@ module.exports = function(app) {
 		    colorPalette[i] = colorPalette[i + Math.floor(Math.random() * 10)];
 		  }
 
+		  $scope.currentImage.colorPalette = colorPalette;
+
 		  console.log(colorPalette);
 		  $scope.render();
 		};
@@ -153,6 +202,8 @@ module.exports = function(app) {
 		  for(var i=0; i<1024; i++) {
 		    colorPalette[i] = colorPalette[i + 1];
 		  }
+
+		  $scope.currentImage.colorPalette = colorPalette;
 
 		  console.log(colorPalette);
 		  $scope.render();

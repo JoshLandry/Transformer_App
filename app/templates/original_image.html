@@ -4,9 +4,10 @@
 <button data-ng-click="colorStep()">Colorstep</button>
 <button data-ng-click="colorCycle()">Colorcycle</button> <br>
 <img src='{{currentImage.URL}}' id="current_image"/> <br>
+<button data-ng-click="checkCurrentInfo()">What image is this?</button>
 <form>
     <label for="newImage"></label>
     Name yr image: <input type="text" id="newImageName" data-ng-model="newImage.imageName"> <br>
     Image summary: <input type="text" id="newImageDesc" data-ng-model="newImage.imageDesc"> <br>
-    Save transphormed image: <input type="submit" data-ng-click="create(newImage)"></input>
+    Save to new image: <input type="submit" data-ng-click="create(newImage)"></input>
 </form>

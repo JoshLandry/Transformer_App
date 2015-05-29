@@ -13,6 +13,9 @@
     <li>
       Image Data: {{image.imageData}}
     </li>
+    <li>
+      Color Palette: {{image.colorPalette}}
+    </li>
     <form data-ng-if="image.editing">
         <label for="image{{image._id}}"></label>
         Rename it thus: <input type="text" id="image{{image._id}}" data-ng-model="image.imageName"> <br>
