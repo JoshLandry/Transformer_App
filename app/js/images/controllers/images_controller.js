@@ -50,7 +50,7 @@ module.exports = function(app) {
 
 	         	if($scope.currentImage.colorSettings) {
 	         		for(var i=0; i<1024; i++) {
-	         			// console.log (colorPalette[i] + " || " + $scope.currentImage.colorSettings[i]);
+	         			console.log (colorPalette[i] + " || " + $scope.currentImage.colorSettings[i]);
 		    				colorPalette[i] = $scope.currentImage.colorSettings[i];
 		  				}
 	          }

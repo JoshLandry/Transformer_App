@@ -80,7 +80,7 @@ module.exports = function(app) {
 
 	         	if($scope.currentImage.colorSettings) {
 	         		for(var i=0; i<1024; i++) {
-	         			// console.log (colorPalette[i] + " || " + $scope.currentImage.colorSettings[i]);
+	         			console.log (colorPalette[i] + " || " + $scope.currentImage.colorSettings[i]);
 		    				colorPalette[i] = $scope.currentImage.colorSettings[i];
 		  				}
 	          }
@@ -136,7 +136,7 @@ module.exports = function(app) {
 				console.log(image.imageName);
 				console.log(image.imageDesc);
 				console.log(image.colorPalette);
-				console.log(image.data);
+				// console.log(image.data);
 				console.log(image);
 				console.log($scope.currentImage.data);
 			}
