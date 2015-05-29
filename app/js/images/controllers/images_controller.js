@@ -50,8 +50,8 @@ module.exports = function(app) {
 
 	         	if(image.colorPalette) {
 	         		for(var i=0; i<1024; i++) {
-		    			colorPalette[i] = image.colorPalette[i];
-		    			console.log(colorPalette[i]);
+	         			console.log (colorPalette[i] + " || " + image.colorPalette[i]);
+		    				colorPalette[i] = image.colorPalette[i];
 		  				}
 	          }
 
